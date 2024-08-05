@@ -15,8 +15,6 @@
 
 ## Table of contents
 
-
-
 ⚡️ Basic demo application using `@particle-network/auth-core` and `@particle-network/aa` to initiate social login and send transactions via an account abstraction smart account on IoTex.
 
 This is a lower-level library that powers `@particle-network/auth-core-modal`. The developer implementing this library must build most additional functionality beyond the aforementioned (login and transaction execution).
@@ -102,10 +100,6 @@ yarn dev
 ## Development Next JS
 
 Particle Auth config is in `src/app/layout.tsx`. 
-
-## Development React Native
-
-Particle Auth config is in `src/app/index.tsx`. 
 
 ### Config social logins
 
