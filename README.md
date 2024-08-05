@@ -59,7 +59,7 @@ Particle Network natively supports and facilitates the end-to-end utilization of
 
 ### Clone this repository
 ```
-git clone https://github.com/soos3d/kakarot-particle-auth-aa-demo.git
+git clone https://github.com/Particle-Network/kakarot-auth-aa-demo.git
 ```
 
 ### Move into the app directory (Next JS)
