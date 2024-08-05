@@ -3,7 +3,7 @@
     <img src="https://i.imgur.com/xmdzXU4.png" style="display: inline-block; vertical-align: middle;" />
   </a>
   <a href="https://another-link.com/">
-    <img src="https://docs.kakarot.org/img/logo.svg" style="display: inline-block; vertical-align: middle;" />
+    <img src="https://docs.kakarot.org/img/logo.svg" style="display: inline-block; vertical-align: middle; width: 300px; heigh: 100px;" />
   </a>
   <h3>
     @particle-network/auth-core @particle-network/aa Demo Application 
