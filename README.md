@@ -6,7 +6,7 @@
     <img src="https://docs.kakarot.org/img/logo.svg" style="display: inline-block; vertical-align: middle; width: 400px; heigh: 150px;" />
   </a>
   <h3>
-    @particle-network/auth-core @particle-network/aa Demo Application 
+    @particle-network/authkit @particle-network/aa Demo Application 
   </h3>
 </div>
 
@@ -15,19 +15,17 @@
 
 ## Table of contents
 
-⚡️ Basic demo application using `@particle-network/auth-core` and `@particle-network/aa` to initiate social login and send transactions via an account abstraction smart account on IoTex.
+⚡️ Basic demo application using `@particle-network/authkit` and `@particle-network/aa` to initiate social login and send transactions via an account abstraction smart account on Kakarot.
 
-This is a lower-level library that powers `@particle-network/auth-core-modal`. The developer implementing this library must build most additional functionality beyond the aforementioned (login and transaction execution).
+This app allows you to log in using social logins and interact with the Kakarot Sepolia testnet by displaying account information and sending a transfer transaction to an address you can input in the UI. The user can select to send a gasless transaction or pay gas with the native token.
 
-This app allows you to log in using social logins and interact with the Ethereum Sepolia and Base Sepolia testnets by displaying account information and sending a transfer transaction to an address you can input in the UI. The user can select to send a gasless transaction or pay gas with the native token.
-
-This demo is built in both Next JS and Native React.
+This demo is built in both Next JS and React.
 
 > The Next application is within the `kakarot-particle-aa-nextjs` directory.
 
 Built using:
 
-- **Particle Auth Core**
+- **Particle Authkit**
 - **Particle AA SDK**
 - **ethers.js V6.x.x**
 - **TypeScript**
@@ -37,9 +35,9 @@ Built using:
 
 [Kakarot zkEVM](https://www.kakarot.org/) is a zk-rollup built on the Starknet stack, leveraging CairoVM and StarknetOS runtime for provable execution. Fully compatible with Ethereum, Kakarot benefits from the latest EVM upgrades and innovations in zero-knowledge technology, making it a powerful and seamless platform for dApp development.
 
-## 🔑 Particle Auth Core
+## 🔑 Particle Auth
 
-Particle Auth Core, a component of Particle Network's Wallet-as-a-Service, enables seamless onboarding to an application-embedded MPC-TSS/AA wallet facilitated by social login, such as Google, GitHub, email, phone number, etc. - as an alternative to Particle Auth, the Auth Core SDK comes with more control over the modal itself, application-embedded popups rather than redirects, and so on.
+Particle Auth, a component of Particle Network's Wallet-as-a-Service, enables seamless onboarding to an application-embedded MPC-TSS/AA wallet facilitated by social login, such as Google, GitHub, email, phone number, etc.
 
 👉 Learn more about [Particle Auth](https://developers.particle.network/docs/building-with-particle-auth).
 
