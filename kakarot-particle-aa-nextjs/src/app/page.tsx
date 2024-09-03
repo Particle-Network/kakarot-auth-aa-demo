@@ -7,7 +7,7 @@ import {
   useEthereum,
   useConnect,
   useAuthCore,
-} from "@particle-network/auth-core-modal";
+} from "@particle-network/authkit";
 import {
   AAWrapProvider,
   SendTransactionMode,
@@ -16,7 +16,7 @@ import {
 import { ethers, type Eip1193Provider } from "ethers";
 
 // Import the Kakarot chain
-import { KakarotSepolia } from "@particle-network/chains";
+import { kakarotSepolia } from "@particle-network/authkit/chains"; // Chains are imported here
 
 // UI component to display links to the Particle sites
 import LinksGrid from "./components/Links";
@@ -28,7 +28,7 @@ import { formatBalance, truncateAddress } from "./utils/utils";
 
 const Home: NextPage = () => {
   // Hooks to manage logins, data display, and transactions
-  const { connect, disconnect, connectionStatus } = useConnect();
+  const { connect, disconnect, connectionStatus, connected } = useConnect();
   const { provider, chainInfo } = useEthereum();
   const { userInfo } = useAuthCore();
 
@@ -53,14 +53,12 @@ const Home: NextPage = () => {
         SIMPLE: [
           {
             version: "2.0.0",
-            chainIds: [KakarotSepolia.id],
+            chainIds: [kakarotSepolia.id],
           },
         ],
       },
     },
   });
-
-  console.log(KakarotSepolia.rpcUrl);
 
   // Use this syntax to upadate the smartAccount if you define more that one smart account provider in accountContracts
   //smartAccount.setSmartAccountContract({ name: "SIMPLE", version: "1.0.0" });
@@ -111,7 +109,7 @@ const Home: NextPage = () => {
 
   // Handle user login
   const handleLogin = async () => {
-    if (!userInfo) {
+    if (!connected) {
       await connect({});
     }
   };
@@ -132,7 +130,7 @@ const Home: NextPage = () => {
     const signer = await ethersProvider.getSigner();
     const tx = {
       to: recipientAddress,
-      value: ethers.parseEther("0.01"),
+      value: ethers.parseEther("0.001"),
       data: "0x", // data is needed only when interacting with smart contracts. 0x equals to zero and it's here for demonstration only
     };
 
@@ -157,6 +155,11 @@ const Home: NextPage = () => {
     <div className="min-h-screen flex flex-col items-center justify-between p-8 bg-black text-white">
       <Header />
       <main className="flex-grow flex flex-col items-center justify-center w-full max-w-6xl mx-auto">
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg max-w-sm mx-auto mb-4">
+          <h2 className="text-md font-semibold text-white">
+            Status: {connectionStatus}
+          </h2>
+        </div>
         {!userInfo ? (
           <div className="login-section">
             <button
@@ -184,20 +187,12 @@ const Home: NextPage = () => {
                   />
                 </div>
                 <h2 className="text-lg font-semibold mb-2 text-white">
-                  Status: {connectionStatus}
-                </h2>
-                <h2 className="text-lg font-semibold mb-2 text-white">
                   Address: <code>{truncateAddress(address || "")}</code>
                 </h2>
                 <div className="flex items-center">
                   <h3 className="text-lg mb-2 text-gray-400">
-                    Chain: {chainInfo.fullname}
+                    Chain: {chainInfo.name}
                   </h3>
-                  <img
-                    src={chainInfo.icon}
-                    alt="Chain logoo"
-                    className="w-8 h-8 ml-2 rounded-full"
-                  />
                 </div>
                 <div className="flex items-center">
                   <h3 className="text-lg font-semibold text-purple-400 mr-2">
@@ -255,13 +250,15 @@ const Home: NextPage = () => {
                 >
                   {isSending
                     ? "Sending..."
-                    : `Send 0.01 ${chainInfo.nativeCurrency.symbol}`}
+                    : `Send 0.001 ${chainInfo.nativeCurrency.symbol}`}
                 </button>
-                {/* You can use chainInfo.blockExplorerUrl to always link the correct block explorer dynamically*/}
+                {/* You can use chainInfo.blockExplorers?.default.url to always link the correct block explorer dynamically*/}
                 {transactionHash && (
                   <TxNotification
                     hash={transactionHash}
-                    blockExplorerUrl={chainInfo.blockExplorerUrl}
+                    blockExplorerUrl={
+                      chainInfo.blockExplorers?.default.url || ""
+                    }
                   />
                 )}
               </div>
